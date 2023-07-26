@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource
+            name="jdbc/projetEni"
+            driverClassName="com.mysql.cj.jdbc.Driver"
+            type="javax.sql.DataSource"
+            url="jdbc:mysql://localhost:8889/PROJECTENI1"
+            username="root"
+            password="root"
+
+            maxTotal="300"
+            maxIdle="30"
+            maxWaitMillis="10000"
+    />
+
+
+</Context>
