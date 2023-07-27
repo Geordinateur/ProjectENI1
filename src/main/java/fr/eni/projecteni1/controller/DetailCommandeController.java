@@ -11,7 +11,7 @@ public class DetailCommandeController {
   @Autowired
   private DetailCommandeService detailCommandeService;
 
-  @GetMapping({"DetailCommande", "/"})
+  @GetMapping({"/DetailCommande"})
   @CrossOrigin
   public String getDetailCommande(){
     return this.detailCommandeService.getDetailCommandeService();
