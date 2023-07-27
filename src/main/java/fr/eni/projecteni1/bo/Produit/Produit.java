@@ -1,4 +1,4 @@
-package fr.eni.projecteni1.bo;
+package fr.eni.projecteni1.bo.Produit;
 
 public class Produit implements Type{
 
@@ -7,10 +7,15 @@ public class Produit implements Type{
   private int id;
   private EnumProductType libelle;
 
+
+
   public Produit(String name, Float prix,  EnumProductType libelle) {
     this.name = name;
     this.prix = prix;
     this.libelle = libelle;
+  }
+
+  public Produit() {
   }
 
   public String getName() {
