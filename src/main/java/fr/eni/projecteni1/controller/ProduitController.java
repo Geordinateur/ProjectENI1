@@ -18,7 +18,7 @@ public class ProduitController {
 
     @GetMapping({"/Produits"})
     @CrossOrigin
-    public List<Produit> getProduits() {
+    public List<Produit> getProduit() {
         return this.produitService.getProduits();
     }
 

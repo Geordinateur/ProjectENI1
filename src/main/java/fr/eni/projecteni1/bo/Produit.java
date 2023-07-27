@@ -6,6 +6,7 @@ public class Produit {
   private Float prix;
   private int id;
   private int idType;
+  private Type type;
 
   public Produit() {}
 
@@ -13,6 +14,12 @@ public class Produit {
     this.name = name;
     this.prix = prix;
     this.idType = idType;
+  }
+
+  public Produit(String name, Float prix, Type type) {
+    this.name = name;
+    this.prix = prix;
+    this.type = type;
   }
 
   public String getName() {
@@ -44,4 +51,10 @@ public class Produit {
   }
 
   public void setIdType(int idType) { this.idType=idType; }
+
+  public Type getType() { return this.type; }
+
+  public void setType(Type type) {
+    this.type = type;
+  }
 }

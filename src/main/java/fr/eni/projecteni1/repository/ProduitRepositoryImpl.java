@@ -1,6 +1,7 @@
 package fr.eni.projecteni1.repository;
 
 import fr.eni.projecteni1.bo.Produit;
+import fr.eni.projecteni1.bo.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -18,16 +19,14 @@ public class ProduitRepositoryImpl implements ProduitRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public ProduitRepositoryImpl(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
+    public ProduitRepositoryImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public List<Produit> getProduits() {
-        String sql = "SELECT * FROM TProduits";
+        String sql = "SELECT p.id, p.name, p.prix, p.idType, t.libelle as type_name FROM TProduits p INNER JOIN TTypes t ON p.idType = t.id ";
 
-        return jdbcTemplate.query(sql, new PreparedStatementSetter() {
-            @Override
-            public void setValues(PreparedStatement ps) throws SQLException {
-            }
-        }, new ProduitRowMapper());
+        return jdbcTemplate.query(sql, new ProduitRowMapper());
     }
 
     @Override
@@ -40,10 +39,11 @@ public class ProduitRepositoryImpl implements ProduitRepository {
         @Override
         public Produit mapRow(ResultSet rs, int rowNum) throws SQLException {
             Produit produit = new Produit();
-            //produit.setId(rs.getInt("id"));
+            produit.setId(rs.getInt("id"));
             produit.setName(rs.getString("name"));
             produit.setPrix(rs.getFloat("prix"));
             produit.setIdType(rs.getInt("idType"));
+            produit.setType(new Type(rs.getInt("idType"), rs.getString("type_name")));
             return produit;
         }
     }
