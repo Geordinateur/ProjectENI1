@@ -1,8 +1,6 @@
 package fr.eni.projecteni1.bo;
 
-public interface Type {
-  int getId();
-  void setId(int id);
-  EnumProductType getLibelle();
-  void setLibelle(EnumProductType libelle);
+public class Type {
+    private int id;
+    private String libelle;
 }

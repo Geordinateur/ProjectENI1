@@ -1,10 +1,11 @@
 package fr.eni.projecteni1.repository;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
-public class ProduitRepository {
-    public String getProduit(){
-        return "Hello World!";
-    }
+import fr.eni.projecteni1.bo.Produit;
+
+public interface ProduitRepository {
+    public List<Produit> getProduits();
+
+    public void saveProduit(Produit produit);
 }

@@ -1,12 +1,15 @@
 package fr.eni.projecteni1.service;
 
-import fr.eni.projecteni1.repository.ProduitRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import fr.eni.projecteni1.bo.Produit;
 
-@Service
-public class ProduitService {
-    @Autowired
-    private ProduitRepository produitRepository;
-    public String getProduitService() { return this.produitRepository.getProduit(); }
+public interface ProduitService {
+    public List<Produit> getProduits();
+    public void saveProduit(Produit produit);
+
+    //private ProduitRepository produitRepository;
+    //public String getProduitService() { return this.produitRepository.getProduit(); }
 }

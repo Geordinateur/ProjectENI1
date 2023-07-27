@@ -1,16 +1,18 @@
 package fr.eni.projecteni1.bo;
 
-public class Produit implements Type{
+public class Produit {
 
   private String name;
   private Float prix;
   private int id;
-  private EnumProductType libelle;
+  private int idType;
 
-  public Produit(String name, Float prix,  EnumProductType libelle) {
+  public Produit() {}
+
+  public Produit(String name, Float prix,  int idType) {
     this.name = name;
     this.prix = prix;
-    this.libelle = libelle;
+    this.idType = idType;
   }
 
   public String getName() {
@@ -29,33 +31,17 @@ public class Produit implements Type{
     this.prix = prix;
   }
 
-  @Override
-  public String toString() {
-    return "Produit{" +
-      "name='" + name + '\'' +
-      ", prix=" + prix +
-      ", id=" + id +
-      ", libelle=" + libelle +
-      '}';
-  }
-
-  @Override
   public int getId() {
     return this.id;
   }
 
-  @Override
   public void setId(int id) {
   this.id=id;
   }
 
-  @Override
-  public EnumProductType getLibelle() {
-   return this.libelle;
+  public int getIdType() {
+   return this.idType;
   }
 
-  @Override
-  public void setLibelle(EnumProductType libelle) {
-  this.libelle=libelle;
-  }
+  public void setIdType(int idType) { this.idType=idType; }
 }
