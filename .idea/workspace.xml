@@ -10,8 +10,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeInterfaceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeInterfaceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/CommandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/CommandeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +139,7 @@
       <workItem from="1690355585466" duration="4137000" />
       <workItem from="1690360344388" duration="14429000" />
       <workItem from="1690440649342" duration="25891000" />
-      <workItem from="1690528358881" duration="7869000" />
+      <workItem from="1690528358881" duration="11648000" />
     </task>
     <servers />
   </component>

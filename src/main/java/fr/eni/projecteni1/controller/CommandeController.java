@@ -15,7 +15,6 @@ import java.util.Map;
 public class CommandeController {
 
 
-
   @Autowired
   private CommandeService commandeService;
 
@@ -23,10 +22,10 @@ public class CommandeController {
   @CrossOrigin
   public ResponseEntity<Map<String, String>> saveOrder(@RequestBody Commande commande) throws SQLException {
     Boolean isSuccess = this.commandeService.saveOrder(commande);
-    if(isSuccess){
+    if (isSuccess) {
       return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("Save Order", "Success"));
-    } else{
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("Save Order","Failed/Error"));
+    } else {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("Save Order", "Failed/Error"));
     }
   }
 
@@ -34,10 +33,17 @@ public class CommandeController {
   @CrossOrigin
   public ResponseEntity<Map<String, String>> deleteOrder(@PathVariable Integer id) throws SQLException {
     Boolean isSuccess = this.commandeService.deleteOrder(id);
-    if(isSuccess){
+    if (isSuccess) {
       return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("Delete Order", "success"));
-    }else{
+    } else {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("Delete Order ", "Failed/Error"));
     }
+  }
+
+  @GetMapping("/orderById/{id}")
+  @CrossOrigin
+  public ResponseEntity<Commande> getOrderById(@PathVariable Integer id) throws SQLException{
+    Commande order =this.commandeService.getOrderById(id);
+    return ResponseEntity.ok(order);
   }
 }

@@ -9,6 +9,6 @@ public interface CommandeInterface {
   public int saveOrder(Commande commande) throws SQLException;
   public int deleteOrder(Integer id) throws SQLException;
 
- /* public int getOrderById(Commande commande) throws SQLException;*/
+  public Commande getOrderById(Integer id) throws SQLException;
 
 }

@@ -43,4 +43,20 @@ public class CommandeService {
       return false;
     }
   }
+
+  public Commande getOrderById(Integer id) throws SQLException{
+    try{
+      Commande order =  this.commandeInterface.getOrderById(id);
+      if(order == null){
+       throw new RuntimeException();
+      } return order;
+
+    }catch(SQLException error){
+      System.out.println("Erreur SQL : " + error.getMessage());
+      System.out.println("Code d'état SQL : " + error.getSQLState());
+      System.out.println("Code d'erreur du fournisseur : " + error.getErrorCode());
+      error.printStackTrace();
+      throw new RuntimeException("SQL erred" , error);
+    }
+  }
 }

@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.List;
 
 @Repository
 public class CommandeInterfaceImpl implements CommandeInterface {
@@ -71,5 +73,19 @@ public class CommandeInterfaceImpl implements CommandeInterface {
       error.printStackTrace();
       throw error;
     }
+  }
+  public static class OrderRowMapper implements RowMapper<Commande>{
+    @Override
+    public Commande mapRow(ResultSet rs, int rowNum) throws SQLException{
+      Commande order = new Commande();
+      order.setId(rs.getInt("id"));
+      order.setHeurePreparation(rs.getDate("heurePreparation"));
+      return order;
+    }
+  }
+  @Override
+  public Commande getOrderById(Integer id) throws SQLException {
+    String sql = "SELECT * FROM commande where id = ?";
+    return jdbcTemplate.queryForObject(sql, new Object[]{id}, new OrderRowMapper());
   }
 }
