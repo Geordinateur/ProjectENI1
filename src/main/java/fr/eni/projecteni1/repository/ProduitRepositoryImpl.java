@@ -24,16 +24,29 @@ public class ProduitRepositoryImpl implements ProduitRepository {
     }
 
     public List<Produit> getProduits() {
-        String sql = "SELECT p.id, p.name, p.prix, p.idType, t.libelle as type_name FROM TProduits p INNER JOIN TTypes t ON p.idType = t.id ";
+        String sql = "SELECT p.id, p.name, p.prix, p.quantite, p.idType, t.libelle as type_name FROM TProduits p INNER JOIN TTypes t ON p.idType = t.id ";
 
         return jdbcTemplate.query(sql, new ProduitRowMapper());
     }
 
     @Override
     public void saveProduit(Produit produit) {
-       String sql = "INSERT INTO TProduits (name, prix, idType) VALUES (?, ?, ?)";
-       jdbcTemplate.update(sql, produit.getName(), produit.getPrix(), produit.getIdType());
+       String sql = "INSERT INTO TProduits (name, prix, quantite, idType) VALUES (?, ?, ?, ?)";
+       jdbcTemplate.update(sql, produit.getName(), produit.getPrix(), produit.getQuantite(), produit.getIdType());
     }
+
+    @Override
+    public int deleteProduit(Produit produit) {
+        String sql = "DELETE FROM TProduits WHERE id = ? ";
+        return jdbcTemplate.update(sql, produit.getId());
+
+    }
+
+    public int updateProduit(Produit produit) {
+        String sql = "UPDATE TProduits SET name = ?, prix = ?, quantite = ?, idType = ? WHERE id = ?";
+        return jdbcTemplate.update(sql, produit.getName(), produit.getPrix(), produit.getQuantite(), produit.getIdType(), produit.getId());
+    }
+
 
     private static class ProduitRowMapper implements RowMapper<Produit> {
         @Override
@@ -42,6 +55,7 @@ public class ProduitRepositoryImpl implements ProduitRepository {
             produit.setId(rs.getInt("id"));
             produit.setName(rs.getString("name"));
             produit.setPrix(rs.getFloat("prix"));
+            produit.setQuantite((rs.getInt("quantite")));
             produit.setIdType(rs.getInt("idType"));
             produit.setType(new Type(rs.getInt("idType"), rs.getString("type_name")));
             return produit;
