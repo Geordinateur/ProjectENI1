@@ -6,12 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d227bc66-d87f-4485-963c-6ded54956137" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/bo/Produit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/bo/Produit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/controller/ProduitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/controller/ProduitController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/ProduitRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/ProduitRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/ProduitRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/ProduitRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/ProduitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/ProduitService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/ProduitServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/ProduitServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +99,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/wjee/demoCouches&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/wjee/PROJECTENI1-front&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -198,7 +192,10 @@
       <workItem from="1690452493864" duration="1089000" />
       <workItem from="1690457883357" duration="12110000" />
       <workItem from="1690528310254" duration="4781000" />
-      <workItem from="1690533618333" duration="4174000" />
+      <workItem from="1690533618333" duration="4291000" />
+      <workItem from="1690538395553" duration="299000" />
+      <workItem from="1690551406774" duration="198000" />
+      <workItem from="1690551829882" duration="1412000" />
     </task>
     <servers />
   </component>
