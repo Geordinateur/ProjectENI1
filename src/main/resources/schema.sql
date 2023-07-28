@@ -1,4 +1,4 @@
-CREATE TABLE commande
+CREATE TABLE IF NOT EXISTS commande
 (
     id   INT PRIMARY KEY AUTO_INCREMENT,
     heurePreparation  DATETIME NOT NULL

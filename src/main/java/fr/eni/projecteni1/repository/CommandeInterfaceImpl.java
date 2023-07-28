@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -22,7 +23,7 @@ public class CommandeInterfaceImpl implements CommandeInterface {
 
 
   @Override
-  public void saveCommand(Commande commande) {
+  public int saveOrder(Commande commande) {
     if (commande.getHeurePreparation() == null) {
       throw new IllegalArgumentException("heurePreparation cannot be null");
     }
@@ -30,7 +31,7 @@ public class CommandeInterfaceImpl implements CommandeInterface {
       KeyHolder keyHolder = new GeneratedKeyHolder();
       String sql = "INSERT INTO commande (heurePreparation) VALUES (?)";
 
-      jdbcTemplate.update(new PreparedStatementCreator() {
+      int result = jdbcTemplate.update(new PreparedStatementCreator() {
         public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
           PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
           ps.setTimestamp(1, new Timestamp(commande.getHeurePreparation().getTime()));
@@ -43,6 +44,7 @@ public class CommandeInterfaceImpl implements CommandeInterface {
       }
       // Return the generated key
       commande.setId(keyHolder.getKey().intValue());
+      return result;
 
     } catch (DataAccessException | SQLException e) {
       e.printStackTrace();
@@ -51,18 +53,19 @@ public class CommandeInterfaceImpl implements CommandeInterface {
   }
 
   @Override
-  public void deleteCommand(Commande id_commande) {
-    if (id_commande.getId() == null) {
+  public int deleteOrder(Integer id) {
+    if (id== null) {
       throw new IllegalArgumentException("Commande null");
     }
     try {
       String sql = "DELETE FROM commande where id = ? ";
-      int rowAffected = jdbcTemplate.update(sql, id_commande.getId());
+      int rowAffected = jdbcTemplate.update(sql,id);
       if (rowAffected == 0) {
         System.out.println(" Aucune ligne effacer ");
       } else {
         System.out.println(rowAffected + " ligné effacé");
       }
+      return rowAffected;
 
     } catch (Exception error) {
       error.printStackTrace();
