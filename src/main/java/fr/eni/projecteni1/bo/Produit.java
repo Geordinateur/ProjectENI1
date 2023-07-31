@@ -3,6 +3,8 @@ package fr.eni.projecteni1.bo;
 public class Produit {
 
   private String name;
+
+  private String details;
   private Float prix;
   private Integer quantite;
   private int id;
@@ -36,6 +38,14 @@ public class Produit {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getDetails() {
+    return details;
+  }
+
+  public void setDetails(String details) {
+    this.details = details;
   }
 
   public Float getPrix() {
