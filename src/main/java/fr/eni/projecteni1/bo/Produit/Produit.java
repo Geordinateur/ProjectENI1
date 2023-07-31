@@ -1,66 +1,63 @@
 package fr.eni.projecteni1.bo.Produit;
 
-public class Produit implements Type{
+public class Produit {
+  private Integer id;
+  private String nom;
+  private String description;
+  private Double prix;
 
-  private String name;
-  private Float prix;
-  private int id;
-  private EnumProductType libelle;
-
-
-
-  public Produit(String name, Float prix,  EnumProductType libelle) {
-    this.name = name;
+  public Produit(Integer id, String nom, String description, Double prix) {
+    this.id = id;
+    this.nom = nom;
+    this.description = description;
     this.prix = prix;
-    this.libelle = libelle;
   }
 
   public Produit() {
   }
 
-  public String getName() {
-    return name;
+  // Getters
+  public Integer getId() {
+    return id;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public String getNom() {
+    return nom;
   }
 
-  public Float getPrix() {
+  public String getDescription() {
+    return description;
+  }
+
+  public Double getPrix() {
     return prix;
   }
 
-  public void setPrix(Float prix) {
+  // Setters
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public void setPrix(Double prix) {
     this.prix = prix;
   }
 
   @Override
   public String toString() {
     return "Produit{" +
-      "name='" + name + '\'' +
+      "id=" + id +
+      ", nom='" + nom + '\'' +
+      ", description='" + description + '\'' +
       ", prix=" + prix +
-      ", id=" + id +
-      ", libelle=" + libelle +
       '}';
   }
-
-  @Override
-  public int getId() {
-    return this.id;
-  }
-
-  @Override
-  public void setId(int id) {
-  this.id=id;
-  }
-
-  @Override
-  public EnumProductType getLibelle() {
-   return this.libelle;
-  }
-
-  @Override
-  public void setLibelle(EnumProductType libelle) {
-  this.libelle=libelle;
-  }
 }
+

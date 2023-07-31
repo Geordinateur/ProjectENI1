@@ -1,18 +1,15 @@
 package fr.eni.projecteni1.bo.DetailCommande;
 
-import fr.eni.projecteni1.bo.Commande.CommandeStatus;
 import fr.eni.projecteni1.bo.Produit.Produit;
 
-public class DetailCommande {
+public class DetailOrder {
   private Integer id;
   private Produit produit;
+  private Integer quantity;
 
-  private Integer quantité;
-
-
-  public DetailCommande(Produit produit, Integer quantité) {
+  public DetailOrder( Produit produit, Integer quantity) {
     this.produit = produit;
-    this.quantité = quantité;
+    this.quantity = quantity;
   }
 
   public Integer getId() {
@@ -31,20 +28,20 @@ public class DetailCommande {
     this.produit = produit;
   }
 
-  public Integer getQuantité() {
-    return quantité;
+  public Integer getQuantity() {
+    return quantity;
   }
 
-  public void setQuantité(Integer quantité) {
-    this.quantité = quantité;
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
   }
 
   @Override
   public String toString() {
-    return "DetailCommande{" +
+    return "DetailOrder{" +
       "id=" + id +
       ", produit=" + produit +
-      ", quantité=" + quantité +
+      ", quantity=" + quantity +
       '}';
   }
 }

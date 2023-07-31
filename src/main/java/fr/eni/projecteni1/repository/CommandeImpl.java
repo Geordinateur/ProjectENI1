@@ -5,21 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.util.List;
 
 @Repository
-public class CommandeInterfaceImpl implements CommandeInterface {
+public class CommandeImpl implements CommandeDAO {
   private final JdbcTemplate jdbcTemplate;
 
   @Autowired
-  public CommandeInterfaceImpl(JdbcTemplate jdbcTemplate) {
+  public CommandeImpl(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
   }
 
@@ -40,27 +38,26 @@ public class CommandeInterfaceImpl implements CommandeInterface {
           return ps;
         }
       }, keyHolder);
-      // Check if key was returned
+
       if (keyHolder.getKey() == null) {
         throw new SQLException("Failed to insert Commande, no ID obtained.");
       }
-      // Return the generated key
       commande.setId(keyHolder.getKey().intValue());
       return result;
 
-    } catch (DataAccessException | SQLException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
+    } catch (DataAccessException | SQLException error) {
+      error.printStackTrace();
+      throw new RuntimeException(error);
     }
   }
 
   @Override
   public int deleteOrder(Integer id) {
-    if (id== null) {
+    if (id == null) {
       throw new IllegalArgumentException("Commande null");
     }
     try {
-      String sql = "DELETE FROM commande where id = ? ";
+      String sql = "DELETE FROM commande where id_commande = ? ";
       int rowAffected = jdbcTemplate.update(sql,id);
       if (rowAffected == 0) {
         System.out.println(" Aucune ligne effacer ");
@@ -78,14 +75,14 @@ public class CommandeInterfaceImpl implements CommandeInterface {
     @Override
     public Commande mapRow(ResultSet rs, int rowNum) throws SQLException{
       Commande order = new Commande();
-      order.setId(rs.getInt("id"));
+      order.setId(rs.getInt("id_commande"));
       order.setHeurePreparation(rs.getDate("heurePreparation"));
       return order;
     }
   }
   @Override
   public Commande getOrderById(Integer id) throws SQLException {
-    String sql = "SELECT * FROM commande where id = ?";
+    String sql = "SELECT * FROM commande where id_commande = ?";
     return jdbcTemplate.queryForObject(sql, new Object[]{id}, new OrderRowMapper());
   }
 }

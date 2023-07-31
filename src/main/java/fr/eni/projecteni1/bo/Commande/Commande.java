@@ -1,20 +1,18 @@
 package fr.eni.projecteni1.bo.Commande;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import fr.eni.projecteni1.bo.DetailCommande.DetailCommande;
+import fr.eni.projecteni1.bo.DetailCommande.DetailOrder;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
 public class Commande {
-  private List<DetailCommande> detailCommandes;
+  private List<DetailOrder> detailOrders;
 
   private Integer id;
 
-  private CommandeStatus status ;
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm")
+  private CommandeStatus status;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm")
   private Date heurePreparation;
 
   public Commande() {
@@ -24,7 +22,7 @@ public class Commande {
   @Override
   public String toString() {
     return "Commande{" +
-      "detailCommandes=" + detailCommandes +
+      "detailCommande=" + detailOrders +
       ", id=" + id +
       ", heurePreparation=" + heurePreparation +
       '}';
@@ -34,18 +32,17 @@ public class Commande {
     return heurePreparation;
   }
 
-  public void setHeurePreparation(Date heurePreparation)  {
+  public void setHeurePreparation(Date heurePreparation) {
     this.heurePreparation = heurePreparation;
   }
 
 
-
-  public List<DetailCommande> getDetailCommandes() {
-    return detailCommandes;
+  public List<DetailOrder> getDetailorders() {
+    return detailOrders;
   }
 
-  public void setDetailCommandes(List<DetailCommande> detailCommandes) {
-    this.detailCommandes = detailCommandes;
+  public void setDetailOrders(List<DetailOrder> detailOrders) {
+    this.detailOrders = detailOrders;
   }
 
   public Integer getId() {

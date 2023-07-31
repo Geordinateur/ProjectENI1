@@ -1,7 +1,6 @@
 package fr.eni.projecteni1.service;
 
-import fr.eni.projecteni1.bo.Commande.Commande;
-import fr.eni.projecteni1.repository.CommandeInterface;
+import fr.eni.projecteni1.repository.CommandeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +9,11 @@ import java.sql.SQLException;
 @Service
 public class CommandeService {
   @Autowired
-  private CommandeInterface commandeInterface;
+  private CommandeDAO commandeDAO;
 
-  public Boolean saveOrder(Commande commande) throws SQLException{
+  public Boolean saveOrder(fr.eni.projecteni1.bo.Commande.Commande commande) throws SQLException{
     try{
-      int result = this.commandeInterface.saveOrder(commande);
+      int result = this.commandeDAO.saveOrder(commande);
       if(result > 0){
         return true;
       }
@@ -30,7 +29,7 @@ public class CommandeService {
 
   public Boolean deleteOrder(Integer id) throws SQLException{
     try{
-      int result = this.commandeInterface.deleteOrder(id);
+      int result = this.commandeDAO.deleteOrder(id);
       if(result > 0){
         return true;
       }
@@ -44,9 +43,9 @@ public class CommandeService {
     }
   }
 
-  public Commande getOrderById(Integer id) throws SQLException{
+  public fr.eni.projecteni1.bo.Commande.Commande getOrderById(Integer id) throws SQLException{
     try{
-      Commande order =  this.commandeInterface.getOrderById(id);
+      fr.eni.projecteni1.bo.Commande.Commande order =  this.commandeDAO.getOrderById(id);
       if(order == null){
        throw new RuntimeException();
       } return order;
