@@ -26,7 +26,7 @@ public class ProduitController {
 
     @PostMapping({"/SaveProduit"})
     @CrossOrigin
-    public String ajouterProduit(Produit produit) {
+    public String ajouterProduit(@RequestBody Produit produit) {
         this.produitService.saveProduit(produit);
         return "redirect:/Produits";
     }
