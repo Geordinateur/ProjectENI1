@@ -35,7 +35,7 @@ public class CommandeImpl implements CommandeDAO {
       KeyHolder keyHolder = new GeneratedKeyHolder();
       String sql = "INSERT INTO commande (heurePreparation) VALUES (?)";
 
-      int result = jdbcTemplate.update(new PreparedStatementCreator() {
+       jdbcTemplate.update(new PreparedStatementCreator() {
         public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
           PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
           ps.setTimestamp(1, new Timestamp(commande.getHeurePreparation().getTime()));
@@ -50,7 +50,7 @@ public class CommandeImpl implements CommandeDAO {
       System.out.println("commande id " + keyHolder.getKey().intValue());
 
       String insertDetail = "INSERT INTO detailCommandes(fk_id_commande,fk_id_produit, quantite) VALUES (?,?,?)";
-      int[][] detailOrder = jdbcTemplate.batchUpdate(insertDetail, commande.getDetailOrder(), commande.getDetailOrder().size(), new ParameterizedPreparedStatementSetter<DetailOrderDTO>() {
+       jdbcTemplate.batchUpdate(insertDetail, commande.getDetailOrder(), commande.getDetailOrder().size(), new ParameterizedPreparedStatementSetter<DetailOrderDTO>() {
         @Override
         public void setValues(PreparedStatement ps, DetailOrderDTO ligne) throws SQLException {
           System.out.println("contenance de ligne " + ligne);
