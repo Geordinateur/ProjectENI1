@@ -1,3 +1,4 @@
+/*
 package fr.eni.projecteni1.controller;
 
 import fr.eni.projecteni1.bo.Commande.Commande;
@@ -21,8 +22,6 @@ public class DetailOrderController {
   @PostMapping("/saveDetailOrder")
   @CrossOrigin
   public ResponseEntity<Map<String,String>> saveOrder(@RequestBody DetailOrderDTO detailOrderDTO) throws SQLException {
-    System.out.println("je suis dans le controller");
-    System.out.println(detailOrderDTO.getQuantite() + " quantite dans le controller ");
     int rowAdded = this.detailOrder.createDetailOrder(detailOrderDTO.getCommande(), detailOrderDTO.getProduit(), detailOrderDTO.getQuantite());
     System.out.println(detailOrderDTO.getQuantite());
     if(rowAdded == 0 ){
@@ -42,3 +41,4 @@ public class DetailOrderController {
     }
   }
 }
+*/

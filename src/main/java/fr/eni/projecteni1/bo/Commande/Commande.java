@@ -12,7 +12,7 @@ public class Commande {
   private Integer id;
 
   private CommandeStatus status;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
   private Date heurePreparation;
 
   public Commande() {
@@ -37,7 +37,7 @@ public class Commande {
   }
 
 
-  public List<DetailOrder> getDetailorders() {
+  public List<DetailOrder> getDetailOrders() {
     return detailOrders;
   }
 

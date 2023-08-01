@@ -5,7 +5,7 @@ import fr.eni.projecteni1.bo.Produit.Produit;
 
 public class DetailOrderDTO {
   private Commande commande;
-  private Produit produit;
+  private int produit;
   private Integer quantite;
 
   public DetailOrderDTO() {
@@ -19,11 +19,11 @@ public class DetailOrderDTO {
     this.commande = commande;
   }
 
-  public Produit getProduit() {
+  public int getProduit() {
     return produit;
   }
 
-  public void setProduit(Produit produit) {
+  public void setProduit(int produit) {
     this.produit = produit;
   }
 

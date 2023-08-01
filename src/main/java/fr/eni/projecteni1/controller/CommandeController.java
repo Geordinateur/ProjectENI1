@@ -1,6 +1,7 @@
 package fr.eni.projecteni1.controller;
 
 import fr.eni.projecteni1.bo.Commande.Commande;
+import fr.eni.projecteni1.bo.Commande.CommandeDTO;
 import fr.eni.projecteni1.service.CommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,13 @@ public class CommandeController {
 
   @PostMapping("/saveOrder")
   @CrossOrigin
-  public ResponseEntity<Map<String, String>> saveOrder(@RequestBody Commande commande) throws SQLException {
-    Boolean isSuccess = this.commandeService.saveOrder(commande);
+  public ResponseEntity<Map<String, String>> saveOrder(@RequestBody CommandeDTO commande){
+    Boolean isSuccess = true;
+    try{
+      this.commandeService.saveOrder(commande);
+    }catch(SQLException error){
+      isSuccess = false;
+    }
     if (isSuccess) {
       return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("Save Order", "Success"));
     } else {

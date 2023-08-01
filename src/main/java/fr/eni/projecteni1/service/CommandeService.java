@@ -1,5 +1,6 @@
 package fr.eni.projecteni1.service;
 
+import fr.eni.projecteni1.bo.Commande.CommandeDTO;
 import fr.eni.projecteni1.repository.CommandeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,19 +12,15 @@ public class CommandeService {
   @Autowired
   private CommandeDAO commandeDAO;
 
-  public Boolean saveOrder(fr.eni.projecteni1.bo.Commande.Commande commande) throws SQLException{
+  public void saveOrder(CommandeDTO commande) throws SQLException{
     try{
-      int result = this.commandeDAO.saveOrder(commande);
-      if(result > 0){
-        return true;
-      }
-      return false;
+      this.commandeDAO.saveOrder(commande);
     }catch(SQLException error){
       System.out.println("Erreur SQL : " + error.getMessage());
       System.out.println("Code d'état SQL : " + error.getSQLState());
       System.out.println("Code d'erreur du fournisseur : " + error.getErrorCode());
       error.printStackTrace();
-      return false;
+      throw error;
     }
   }
 

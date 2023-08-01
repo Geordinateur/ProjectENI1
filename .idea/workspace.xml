@@ -6,11 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="d227bc66-d87f-4485-963c-6ded54956137" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/bo/Commande/Commande.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/bo/Commande/Commande.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/bo/DetailCommande/DetailOrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/bo/DetailCommande/DetailOrderDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/controller/CommandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/controller/CommandeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/controller/DetailOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/controller/DetailOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/DetailOrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/DetailOrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/DetailOrderImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/DetailOrderImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/DetailOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/DetailOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/CommandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/CommandeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +137,7 @@
       <workItem from="1690528358881" duration="20182000" />
       <workItem from="1690786420019" duration="12255000" />
       <workItem from="1690807700043" duration="6192000" />
-      <workItem from="1690872881379" duration="1522000" />
+      <workItem from="1690872881379" duration="6904000" />
     </task>
     <servers />
   </component>

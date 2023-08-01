@@ -1,9 +1,14 @@
 package fr.eni.projecteni1.repository;
 
 import fr.eni.projecteni1.bo.Commande.Commande;
+import fr.eni.projecteni1.bo.Commande.CommandeDTO;
+import fr.eni.projecteni1.bo.DetailCommande.DetailOrder;
+import fr.eni.projecteni1.bo.DetailCommande.DetailOrderDTO;
+import fr.eni.projecteni1.bo.Produit.Produit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -23,7 +28,7 @@ public class CommandeImpl implements CommandeDAO {
 
 
   @Override
-  public int saveOrder(Commande commande) {
+  public void saveOrder(CommandeDTO commande) {
     if (commande.getHeurePreparation() == null) {
       throw new IllegalArgumentException("heurePreparation cannot be null");
     }
@@ -42,9 +47,19 @@ public class CommandeImpl implements CommandeDAO {
       if (keyHolder.getKey() == null) {
         throw new SQLException("Failed to insert Commande, no ID obtained.");
       }
-      commande.setId(keyHolder.getKey().intValue());
-      return result;
+       commande.setId(keyHolder.getKey().intValue());
+      System.out.println("commande id " + keyHolder.getKey().intValue());
 
+      String insertDetail = "INSERT INTO detailCommandes(fk_id_commande,fk_id_produit, quantite) VALUES (?,?,?)";
+      int[][] detailOrder = jdbcTemplate.batchUpdate(insertDetail, commande.getDetailOrder(), commande.getDetailOrder().size(), new ParameterizedPreparedStatementSetter<DetailOrderDTO>() {
+        @Override
+        public void setValues(PreparedStatement ps, DetailOrderDTO ligne) throws SQLException {
+          System.out.println("contenance de ligne " + ligne);
+          ps.setInt(1, commande.getId());
+          ps.setInt(2, ligne.getProduit());
+          ps.setInt(3, ligne.getQuantite());
+        }
+      });
     } catch (DataAccessException | SQLException error) {
       error.printStackTrace();
       throw new RuntimeException(error);
