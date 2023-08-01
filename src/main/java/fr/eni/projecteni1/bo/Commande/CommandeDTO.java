@@ -37,6 +37,15 @@ public class CommandeDTO {
     return heurePreparation;
   }
 
+  @Override
+  public String toString() {
+    return "CommandeDTO{" +
+            "detailOrder=" + detailOrder +
+            ", id=" + id +
+            ", heurePreparation=" + heurePreparation +
+            '}';
+  }
+
   public void setHeurePreparation(Date heurePreparation) {
     this.heurePreparation = heurePreparation;
   }

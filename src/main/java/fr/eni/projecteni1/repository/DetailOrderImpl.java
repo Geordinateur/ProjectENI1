@@ -2,7 +2,7 @@ package fr.eni.projecteni1.repository;
 
 import fr.eni.projecteni1.bo.Commande.Commande;
 import fr.eni.projecteni1.bo.DetailCommande.DetailOrder;
-import fr.eni.projecteni1.bo.Produit.Produit;
+import fr.eni.projecteni1.bo.Produit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

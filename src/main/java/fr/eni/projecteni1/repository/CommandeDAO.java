@@ -5,6 +5,7 @@ import fr.eni.projecteni1.bo.Commande.Commande;
 import fr.eni.projecteni1.bo.Commande.CommandeDTO;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface CommandeDAO {
   void saveOrder(CommandeDTO commande) throws SQLException;
@@ -12,5 +13,6 @@ public interface CommandeDAO {
   int deleteOrder(Integer id) throws SQLException;
 
   Commande getOrderById(Integer id) throws SQLException;
+  List<Commande> getCommandes() throws SQLException;
 
 }

@@ -1,4 +1,4 @@
-package fr.eni.projecteni1.controller;
+/*package fr.eni.projecteni1.controller;
 
 import fr.eni.projecteni1.service.DetailCommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,4 +16,4 @@ public class DetailCommandeController {
   public String getDetailCommande(){
     return this.detailCommandeService.getDetailCommandeService();
   }
-}
+}*/

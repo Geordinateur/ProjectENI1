@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,13 +24,14 @@ public class CommandeController {
   @CrossOrigin
   public ResponseEntity<Map<String, String>> saveOrder(@RequestBody CommandeDTO commande){
     Boolean isSuccess = true;
+    System.out.println(commande.toString());
     try{
       this.commandeService.saveOrder(commande);
     }catch(SQLException error){
       isSuccess = false;
     }
     if (isSuccess) {
-      return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("Save Order", "Success"));
+      return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("Commande: ", commande.getId().toString()));
     } else {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("Save Order", "Failed/Error"));
     }
@@ -52,4 +54,11 @@ public class CommandeController {
     Commande order =this.commandeService.getOrderById(id);
     return ResponseEntity.ok(order);
   }
+
+  @GetMapping("/orderById")
+  @CrossOrigin
+  public List<Commande> getCommandes() throws SQLException {
+    return this.commandeService.getCommandes();
+  }
+
 }

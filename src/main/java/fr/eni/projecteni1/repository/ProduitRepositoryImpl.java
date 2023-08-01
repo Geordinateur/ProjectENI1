@@ -24,14 +24,14 @@ public class ProduitRepositoryImpl implements ProduitRepository {
     }
 
     public List<Produit> getProduits() {
-        String sql = "SELECT p.id, p.name, p.details, p.prix, p.quantite, p.idType, t.libelle as type_name FROM TProduits p INNER JOIN TTypes t ON p.idType = t.id ";
+        String sql = "SELECT p.id, p.nom, p.details, p.prix, p.quantite, p.idType, t.libelle as type_name FROM TProduits p INNER JOIN TTypes t ON p.idType = t.id ";
 
         return jdbcTemplate.query(sql, new ProduitRowMapper());
     }
 
     @Override
     public void saveProduit(Produit produit) {
-       String sql = "INSERT INTO TProduits (name, details, prix, quantite, idType) VALUES (?, ?, ?, ?, ?)";
+       String sql = "INSERT INTO TProduits (nom, details, prix, quantite, idType) VALUES (?, ?, ?, ?, ?)";
        jdbcTemplate.update(sql, produit.getName(), produit.getDetails(), produit.getPrix(), produit.getQuantite(), produit.getIdType());
     }
 
@@ -43,7 +43,7 @@ public class ProduitRepositoryImpl implements ProduitRepository {
     }
 
     public int updateProduit(Produit produit) {
-        String sql = "UPDATE TProduits SET name = ?, prix = ?, quantite = ?, idType = ? WHERE id = ?";
+        String sql = "UPDATE TProduits SET nom = ?, prix = ?, quantite = ?, idType = ? WHERE id = ?";
         return jdbcTemplate.update(sql, produit.getName(), produit.getPrix(), produit.getQuantite(), produit.getIdType(), produit.getId());
     }
 
@@ -53,7 +53,7 @@ public class ProduitRepositoryImpl implements ProduitRepository {
         public Produit mapRow(ResultSet rs, int rowNum) throws SQLException {
             Produit produit = new Produit();
             produit.setId(rs.getInt("id"));
-            produit.setName(rs.getString("name"));
+            produit.setName(rs.getString("nom"));
             produit.setDetails(rs.getString("details"));
             produit.setPrix(rs.getFloat("prix"));
             produit.setQuantite((rs.getInt("quantite")));

@@ -1,11 +1,13 @@
 package fr.eni.projecteni1.service;
 
+import fr.eni.projecteni1.bo.Commande.Commande;
 import fr.eni.projecteni1.bo.Commande.CommandeDTO;
 import fr.eni.projecteni1.repository.CommandeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class CommandeService {
@@ -38,6 +40,10 @@ public class CommandeService {
       error.printStackTrace();
       return false;
     }
+  }
+
+  public List<Commande> getCommandes() throws SQLException {
+    return this.commandeDAO.getCommandes();
   }
 
   public fr.eni.projecteni1.bo.Commande.Commande getOrderById(Integer id) throws SQLException{

@@ -4,7 +4,7 @@ import fr.eni.projecteni1.bo.Commande.Commande;
 import fr.eni.projecteni1.bo.Commande.CommandeDTO;
 import fr.eni.projecteni1.bo.DetailCommande.DetailOrder;
 import fr.eni.projecteni1.bo.DetailCommande.DetailOrderDTO;
-import fr.eni.projecteni1.bo.Produit.Produit;
+import fr.eni.projecteni1.bo.Produit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.List;
 
 @Repository
 public class CommandeImpl implements CommandeDAO {
@@ -99,5 +100,11 @@ public class CommandeImpl implements CommandeDAO {
   public Commande getOrderById(Integer id) throws SQLException {
     String sql = "SELECT * FROM commande where id_commande = ?";
     return jdbcTemplate.queryForObject(sql, new Object[]{id}, new OrderRowMapper());
+  }
+
+  @Override
+  public List<Commande> getCommandes() throws SQLException {
+    String sql = "SELECT * FROM commande";
+    return jdbcTemplate.query(sql, new OrderRowMapper());
   }
 }

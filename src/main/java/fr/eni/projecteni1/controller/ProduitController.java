@@ -1,7 +1,6 @@
 package fr.eni.projecteni1.controller;
 
 import fr.eni.projecteni1.bo.Produit;
-import fr.eni.projecteni1.repository.ProduitRepository;
 import fr.eni.projecteni1.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

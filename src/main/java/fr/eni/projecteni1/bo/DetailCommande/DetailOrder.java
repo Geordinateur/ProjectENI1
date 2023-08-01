@@ -1,6 +1,6 @@
 package fr.eni.projecteni1.bo.DetailCommande;
 
-import fr.eni.projecteni1.bo.Produit.Produit;
+import fr.eni.projecteni1.bo.Produit;
 
 public class DetailOrder {
   private Integer id;
