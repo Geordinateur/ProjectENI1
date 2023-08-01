@@ -1,5 +1,6 @@
 package fr.eni.projecteni1.service;
 
+import fr.eni.projecteni1.bo.Commande.Commande;
 import fr.eni.projecteni1.bo.Produit.Produit;
 import fr.eni.projecteni1.repository.DetailOrderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,15 @@ public class DetailOrderService {
   @Autowired
   private DetailOrderImpl detailCommande;
 
-  public int createDeatilOrder (Produit produit, int quantite)throws SQLException {
-    return this.detailCommande.createDetailOrder(produit, quantite);
+  public int createDetailOrder(Commande commande, Produit produit, Integer quantite) throws SQLException {
+    System.out.println(quantite + " quantite dans le service ");
+    System.out.println("je suis dnas le service");
+    if (commande == null || produit == null || quantite <= 0) {
+      System.out.println("je suis dans le if du service");
+      throw new IllegalArgumentException("Commande, Product can not be null and Quantity should be greater than 0");
+    }
+
+    return detailCommande.createDetailOrder(commande,produit,quantite);
   }
 
   public Boolean deleteDetailOrder (Integer id) throws SQLException{

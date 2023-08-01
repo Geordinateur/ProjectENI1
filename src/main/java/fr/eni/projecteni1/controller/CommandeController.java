@@ -18,7 +18,7 @@ public class CommandeController {
   @Autowired
   private CommandeService commandeService;
 
-  @PostMapping("/saveCommande")
+  @PostMapping("/saveOrder")
   @CrossOrigin
   public ResponseEntity<Map<String, String>> saveOrder(@RequestBody Commande commande) throws SQLException {
     Boolean isSuccess = this.commandeService.saveOrder(commande);

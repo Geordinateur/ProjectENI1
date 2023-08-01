@@ -25,13 +25,13 @@ public class DetailOrderImpl implements DetailOrderDAO {
   }
 
   @Override
-  public int createDetailOrder(Produit produit, int quantite) throws SQLException {
+  public int createDetailOrder(Commande commande ,Produit produit, Integer quantite) throws SQLException {
     if(produit == null ){
       throw new IllegalArgumentException("Product can not be null");
     }
     try{
       DetailOrder detailOrder = new DetailOrder(produit, quantite);
-      int detailOrderId = saveDetailOrder(detailOrder);
+      int detailOrderId = saveDetailOrder(detailOrder, commande, produit);
       return detailOrderId;
     }catch(Exception error){
       error.printStackTrace();
@@ -39,7 +39,7 @@ public class DetailOrderImpl implements DetailOrderDAO {
     }
   }
   @Override
-  public int saveDetailOrder(DetailOrder detailOrder)  {
+  public int saveDetailOrder(DetailOrder detailOrder, Commande commande, Produit produit)  {
     if(detailOrder == null){
       throw new IllegalArgumentException("DetailOrder can not be null");
     }
@@ -49,8 +49,7 @@ public class DetailOrderImpl implements DetailOrderDAO {
       int result = jdbcTemplate.update(new PreparedStatementCreator() {
         public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
           PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-          Commande commande = new Commande();
-          Produit produit = new Produit();
+
           ps.setInt(1, commande.getId());
           ps.setInt(2, produit.getId());
           ps.setInt(3, detailOrder.getQuantity() );
