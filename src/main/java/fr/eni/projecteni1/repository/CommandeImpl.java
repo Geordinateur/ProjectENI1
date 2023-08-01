@@ -91,6 +91,7 @@ public class CommandeImpl implements CommandeDAO {
       CommandeDTO order = new CommandeDTO();
       order.setId(rs.getInt("id_commande"));
       order.setHeurePreparation(rs.getDate("heurePreparation"));
+      order.setStatus(rs.getString("status"));
       return order;
     }
   }

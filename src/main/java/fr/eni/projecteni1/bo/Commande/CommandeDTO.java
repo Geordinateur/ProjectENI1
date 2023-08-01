@@ -13,8 +13,18 @@ public class CommandeDTO {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
   private Date heurePreparation;
 
+  private String status;
+
 
   public CommandeDTO() {
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   public List<DetailOrderDTO> getDetailOrder() {

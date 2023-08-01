@@ -7,12 +7,6 @@
     <list default="true" id="d227bc66-d87f-4485-963c-6ded54956137" name="Changes" comment="getAllorder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/bo/Commande/CommandeDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/bo/Commande/CommandeDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/bo/DetailCommande/DetailOrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/bo/DetailCommande/DetailOrderDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/controller/CommandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/controller/CommandeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/CommandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/CommandeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
