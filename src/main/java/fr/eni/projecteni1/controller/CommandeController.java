@@ -24,7 +24,7 @@ public class CommandeController {
   @CrossOrigin
   public ResponseEntity<Map<String, String>> saveOrder(@RequestBody CommandeDTO commande){
     Boolean isSuccess = true;
-    System.out.println(commande.toString());
+    System.out.println(commande);
     try{
       this.commandeService.saveOrder(commande);
     }catch(SQLException error){
@@ -50,15 +50,14 @@ public class CommandeController {
 
   @GetMapping("/orderById/{id}")
   @CrossOrigin
-  public ResponseEntity<Commande> getOrderById(@PathVariable Integer id) throws SQLException{
-    Commande order =this.commandeService.getOrderById(id);
+  public ResponseEntity<CommandeDTO> getOrderById(@PathVariable Integer id) throws SQLException{
+    CommandeDTO order =this.commandeService.getOrderById(id);
     return ResponseEntity.ok(order);
   }
 
-  @GetMapping("/orderById")
+  @GetMapping("/allOrders")
   @CrossOrigin
-  public List<Commande> getCommandes() throws SQLException {
-    return this.commandeService.getCommandes();
+  public List<CommandeDTO> getCommandes() throws SQLException  {
+  return this.commandeService.getOrder();
   }
-
 }

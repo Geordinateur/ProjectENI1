@@ -14,6 +14,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.List;
 
 @Repository
 public class CommandeImpl implements CommandeDAO {
@@ -84,18 +85,52 @@ public class CommandeImpl implements CommandeDAO {
       throw error;
     }
   }
-  public static class OrderRowMapper implements RowMapper<Commande>{
+  public static class OrderRowMapper implements RowMapper<CommandeDTO>{
     @Override
-    public Commande mapRow(ResultSet rs, int rowNum) throws SQLException{
-      Commande order = new Commande();
+    public CommandeDTO mapRow(ResultSet rs, int rowNum) throws SQLException{
+      CommandeDTO order = new CommandeDTO();
       order.setId(rs.getInt("id_commande"));
       order.setHeurePreparation(rs.getDate("heurePreparation"));
       return order;
     }
   }
   @Override
-  public Commande getOrderById(Integer id) throws SQLException {
+  public CommandeDTO getOrderById(Integer id) throws SQLException {
     String sql = "SELECT * FROM commande where id_commande = ?";
-    return jdbcTemplate.queryForObject(sql, new Object[]{id}, new OrderRowMapper());
+    CommandeDTO order = jdbcTemplate.queryForObject(sql, new Object[]{id}, new OrderRowMapper());
+      String detailOrderSql = "SELECT * FROM detailCommandes WHERE fk_id_commande = ?";
+      List<DetailOrderDTO> details = jdbcTemplate.query(detailOrderSql,new Object[]{order.getId()}, new DetailOrderRowMapper());
+      for(DetailOrderDTO detail : details){
+        detail.setCommande(order.getId());
+      }
+      order.setDetailOrder(details);
+      return order;
   }
+
+  public static class DetailOrderRowMapper implements RowMapper<DetailOrderDTO>{
+    @Override
+    public DetailOrderDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+      DetailOrderDTO detail = new DetailOrderDTO();
+      detail.setId(rs.getInt("id_detailCommande"));
+      detail.setProduit(rs.getInt("fk_id_produit"));
+      detail.setQuantite(rs.getInt("quantite"));
+      return detail;
+    }
+  }
+
+  @Override
+  public List<CommandeDTO> getOrders() throws SQLException {
+    String sql = "SELECT * FROM commande";
+    List<CommandeDTO> orders = jdbcTemplate.query(sql, new OrderRowMapper());
+    for(CommandeDTO order : orders){
+        String detailOrderSql = "SELECT * FROM detailCommandes WHERE fk_id_commande = ?";
+        List<DetailOrderDTO> details = jdbcTemplate.query(detailOrderSql,new Object[]{order.getId()}, new DetailOrderRowMapper());
+        for(DetailOrderDTO detail : details){
+          detail.setCommande(order.getId());
+        }
+        order.setDetailOrder(details);
+    }
+    return orders;
+  }
+
 }

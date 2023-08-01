@@ -1,21 +1,29 @@
 package fr.eni.projecteni1.bo.DetailCommande;
 
 import fr.eni.projecteni1.bo.Commande.Commande;
-import fr.eni.projecteni1.bo.Produit;
 
 public class DetailOrderDTO {
-  private Commande commande;
+  private int id;
+
+  private Integer commande;
   private int produit;
   private Integer quantite;
 
   public DetailOrderDTO() {
   }
+  public int getId() {
+    return id;
+  }
 
-  public Commande getCommande() {
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public Integer getCommande() {
     return commande;
   }
 
-  public void setCommande(Commande commande) {
+  public void setCommande(Integer commande) {
     this.commande = commande;
   }
 

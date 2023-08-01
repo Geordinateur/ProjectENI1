@@ -1,6 +1,5 @@
 package fr.eni.projecteni1.service;
 
-import fr.eni.projecteni1.bo.Commande.Commande;
 import fr.eni.projecteni1.bo.Commande.CommandeDTO;
 import fr.eni.projecteni1.repository.CommandeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,10 @@ public class CommandeService {
   @Autowired
   private CommandeDAO commandeDAO;
 
-  public void saveOrder(CommandeDTO commande) throws SQLException{
-    try{
+  public void saveOrder(CommandeDTO commande) throws SQLException {
+    try {
       this.commandeDAO.saveOrder(commande);
-    }catch(SQLException error){
+    } catch (SQLException error) {
       System.out.println("Erreur SQL : " + error.getMessage());
       System.out.println("Code d'état SQL : " + error.getSQLState());
       System.out.println("Code d'erreur du fournisseur : " + error.getErrorCode());
@@ -26,14 +25,14 @@ public class CommandeService {
     }
   }
 
-  public Boolean deleteOrder(Integer id) throws SQLException{
-    try{
+  public Boolean deleteOrder(Integer id) throws SQLException {
+    try {
       int result = this.commandeDAO.deleteOrder(id);
-      if(result > 0){
+      if (result > 0) {
         return true;
       }
       return false;
-    }catch(SQLException error){
+    } catch (SQLException error) {
       System.out.println("Erreur SQL : " + error.getMessage());
       System.out.println("Code d'état SQL : " + error.getSQLState());
       System.out.println("Code d'erreur du fournisseur : " + error.getErrorCode());
@@ -42,23 +41,24 @@ public class CommandeService {
     }
   }
 
-  public List<Commande> getCommandes() throws SQLException {
-    return this.commandeDAO.getCommandes();
+  public List<CommandeDTO> getOrder() throws SQLException {
+    return this.commandeDAO.getOrders();
   }
 
-  public fr.eni.projecteni1.bo.Commande.Commande getOrderById(Integer id) throws SQLException{
-    try{
-      fr.eni.projecteni1.bo.Commande.Commande order =  this.commandeDAO.getOrderById(id);
-      if(order == null){
-       throw new RuntimeException();
-      } return order;
+  public CommandeDTO getOrderById(Integer id) throws SQLException {
+    try {
+      CommandeDTO order = this.commandeDAO.getOrderById(id);
+      if (order == null) {
+        throw new RuntimeException();
+      }
+      return order;
 
-    }catch(SQLException error){
+    } catch (SQLException error) {
       System.out.println("Erreur SQL : " + error.getMessage());
       System.out.println("Code d'état SQL : " + error.getSQLState());
       System.out.println("Code d'erreur du fournisseur : " + error.getErrorCode());
       error.printStackTrace();
-      throw new RuntimeException("SQL erred" , error);
+      throw new RuntimeException("SQL erred", error);
     }
   }
 }

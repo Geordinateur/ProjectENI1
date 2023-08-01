@@ -12,7 +12,7 @@ public interface CommandeDAO {
 
   int deleteOrder(Integer id) throws SQLException;
 
-  Commande getOrderById(Integer id) throws SQLException;
-  List<Commande> getCommandes() throws SQLException;
+  CommandeDTO getOrderById(Integer id) throws SQLException;
+  List<CommandeDTO> getOrders() throws SQLException;
 
 }

@@ -49,13 +49,4 @@ public class CommandeDTO {
   public void setHeurePreparation(Date heurePreparation) {
     this.heurePreparation = heurePreparation;
   }
-
-  @Override
-  public String toString() {
-    return "CommandeDTO{" +
-      "detailOrder=" + detailOrder +
-      ", id=" + id +
-      ", heurePreparation=" + heurePreparation +
-      '}';
-  }
 }
