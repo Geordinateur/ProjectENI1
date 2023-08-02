@@ -44,7 +44,6 @@ public class CommandeService {
   public List<CommandeDTO> getOrder() throws SQLException {
     return this.commandeDAO.getOrders();
   }
-
   public CommandeDTO getOrderById(Integer id) throws SQLException {
     try {
       CommandeDTO order = this.commandeDAO.getOrderById(id);

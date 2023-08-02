@@ -24,7 +24,6 @@ public class CommandeController {
   @CrossOrigin
   public ResponseEntity<Map<String, String>> saveOrder(@RequestBody CommandeDTO commande){
     Boolean isSuccess = true;
-    System.out.println(commande);
     try{
       this.commandeService.saveOrder(commande);
     }catch(SQLException error){
