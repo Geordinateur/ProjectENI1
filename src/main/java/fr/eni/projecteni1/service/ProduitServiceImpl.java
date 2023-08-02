@@ -25,7 +25,7 @@ public class ProduitServiceImpl implements ProduitService {
         return this.produitRepo.deleteProduit(produit);
     }
 
-    public int updateProduit(Produit produit) {
-        return this.produitRepo.updateProduit(produit);
+    public int updateProduit(Integer idProduit, Produit produit) {
+        return this.produitRepo.updateProduit(idProduit, produit);
     }
 }

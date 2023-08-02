@@ -24,7 +24,7 @@ public class ProduitRepositoryImpl implements ProduitRepository {
     }
 
     public List<Produit> getProduits() {
-        String sql = "SELECT p.id, p.nom, p.details, p.prix, p.quantite, p.idType, t.libelle as type_name FROM TProduits p INNER JOIN TTypes t ON p.idType = t.id ";
+        String sql = "SELECT p.id, p.nom, p.details, p.prix, p.quantite, p.idType, p.enable, t.libelle as type_name FROM TProduits p INNER JOIN TTypes t ON p.idType = t.id ";
 
         return jdbcTemplate.query(sql, new ProduitRowMapper());
     }
@@ -42,9 +42,9 @@ public class ProduitRepositoryImpl implements ProduitRepository {
 
     }
 
-    public int updateProduit(Produit produit) {
-        String sql = "UPDATE TProduits SET nom = ?, prix = ?, quantite = ?, idType = ? WHERE id = ?";
-        return jdbcTemplate.update(sql, produit.getName(), produit.getPrix(), produit.getQuantite(), produit.getIdType(), produit.getId());
+    public int updateProduit(Integer idProduit, Produit produit) {
+        String sql = "UPDATE TProduits SET nom = ?, prix = ?, quantite = ?, idType = ?, enable = ? WHERE id = ?";
+        return jdbcTemplate.update(sql, produit.getName(), produit.getPrix(), produit.getQuantite(), produit.getIdType(), produit.getEnable(), produit.getId());
     }
 
 
@@ -57,6 +57,7 @@ public class ProduitRepositoryImpl implements ProduitRepository {
             produit.setDetails(rs.getString("details"));
             produit.setPrix(rs.getFloat("prix"));
             produit.setQuantite((rs.getInt("quantite")));
+            produit.setEnable((rs.getBoolean("enable")));
             produit.setIdType(rs.getInt("idType"));
             produit.setType(new Type(rs.getInt("idType"), rs.getString("type_name")));
             return produit;

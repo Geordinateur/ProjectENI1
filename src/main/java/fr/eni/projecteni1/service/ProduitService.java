@@ -10,7 +10,7 @@ public interface ProduitService {
     public List<Produit> getProduits();
     public void saveProduit(Produit produit);
     public int deleteProduit(Produit produit);
-    public int updateProduit(Produit produit);
+    public int updateProduit(Integer idProduit, Produit produit);
 
     //private ProduitRepository produitRepository;
     //public String getProduitService() { return this.produitRepository.getProduit(); }

@@ -30,10 +30,12 @@ public class ProduitController {
         return "redirect:/Produits";
     }
 
-    @PostMapping({"/UpdateProduit"})
+    @PostMapping({"/UpdateProduit/{id}"})
     @CrossOrigin
-    public ResponseEntity<Map<String, String>> updateProduit(@RequestBody Produit produit) throws SQLException {
-        int isSuccess = this.produitService.updateProduit(produit);
+    public ResponseEntity<Map<String, String>> updateProduit(@PathVariable Integer id, @RequestBody Produit produit) throws SQLException {
+        System.out.println(id);
+        System.out.println(produit.getEnable());
+        int isSuccess = this.produitService.updateProduit(id, produit);
         if(isSuccess > 0){
             return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("Product updated", "Success"));
         } else {
@@ -41,7 +43,7 @@ public class ProduitController {
         }
     }
 
-    @DeleteMapping("/DeleteProduit")
+    @DeleteMapping("/DeleteProduit/{id}")
     @CrossOrigin
     public ResponseEntity<Map<String, String>> supprimerProduit(@RequestBody Produit produit) throws SQLException {
         int isSuccess = this.produitService.deleteProduit(produit);

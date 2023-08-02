@@ -10,6 +10,7 @@ public class Produit {
   private int id;
   private int idType;
   private Type type;
+  private Boolean enable;
 
   public Produit() {}
 
@@ -25,11 +26,12 @@ public class Produit {
     this.type = type;
   }
 
-  public Produit(String name, Float prix, Integer quantite, Type type) {
+  public Produit(String name, Float prix, Integer quantite, Type type, Boolean enable) {
     this.name = name;
     this.prix = prix;
     this.quantite = quantite;
     this.type = type;
+    this.enable = enable;
   }
 
   public String getName() {
@@ -82,5 +84,13 @@ public class Produit {
 
   public void setQuantite(Integer quantite) {
     this.quantite = quantite;
+  }
+
+  public Boolean getEnable() {
+    return enable;
+  }
+
+  public void setEnable(Boolean enable) {
+    this.enable = enable;
   }
 }
