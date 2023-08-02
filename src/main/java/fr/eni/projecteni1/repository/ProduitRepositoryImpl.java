@@ -24,14 +24,14 @@ public class ProduitRepositoryImpl implements ProduitRepository {
     }
 
     public List<Produit> getProduits() {
-        String sql = "SELECT p.id, p.nom, p.details, p.prix, p.quantite, p.idType, p.enable, t.libelle as type_name FROM TProduits p INNER JOIN TTypes t ON p.idType = t.id ";
+        String sql = "SELECT p.id, p.name, p.detail, p.price, p.quantity, p.fk_id_type, p.enable, t.name as type_name FROM products p INNER JOIN types t ON p.fk_id_type= t.id ";
 
         return jdbcTemplate.query(sql, new ProduitRowMapper());
     }
 
     @Override
     public void saveProduit(Produit produit) {
-       String sql = "INSERT INTO TProduits (nom, details, prix, quantite, idType) VALUES (?, ?, ?, ?, ?)";
+       String sql = "INSERT INTO products (name, detail, price, quantity, fk_id_type) VALUES (?, ?, ?, ?, ?)";
        jdbcTemplate.update(sql, produit.getName(), produit.getDetails(), produit.getPrix(), produit.getQuantite(), produit.getIdType());
     }
 
@@ -43,7 +43,7 @@ public class ProduitRepositoryImpl implements ProduitRepository {
     }
 
     public int updateProduit(Integer idProduit, Produit produit) {
-        String sql = "UPDATE TProduits SET nom = ?, prix = ?, quantite = ?, idType = ?, enable = ? WHERE id = ?";
+        String sql = "UPDATE products SET name = ?, price = ?, quantity = ?, fk_id_type = ?, enable = ? WHERE id = ?";
         return jdbcTemplate.update(sql, produit.getName(), produit.getPrix(), produit.getQuantite(), produit.getIdType(), produit.getEnable(), produit.getId());
     }
 
@@ -53,13 +53,13 @@ public class ProduitRepositoryImpl implements ProduitRepository {
         public Produit mapRow(ResultSet rs, int rowNum) throws SQLException {
             Produit produit = new Produit();
             produit.setId(rs.getInt("id"));
-            produit.setName(rs.getString("nom"));
-            produit.setDetails(rs.getString("details"));
-            produit.setPrix(rs.getFloat("prix"));
-            produit.setQuantite((rs.getInt("quantite")));
+            produit.setName(rs.getString("name"));
+            produit.setDetails(rs.getString("detail"));
+            produit.setPrix(rs.getFloat("price"));
+            produit.setQuantite((rs.getInt("quantity")));
             produit.setEnable((rs.getBoolean("enable")));
-            produit.setIdType(rs.getInt("idType"));
-            produit.setType(new Type(rs.getInt("idType"), rs.getString("type_name")));
+            produit.setIdType(rs.getInt("fk_id_type"));
+            produit.setType(new Type(rs.getInt("fk_id_type"), rs.getString("type_name")));
             return produit;
         }
     }

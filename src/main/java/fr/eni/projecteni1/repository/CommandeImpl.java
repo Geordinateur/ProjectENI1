@@ -32,7 +32,7 @@ public class CommandeImpl implements CommandeDAO {
     }
     try {
       KeyHolder keyHolder = new GeneratedKeyHolder();
-      String sql = "INSERT INTO commande (heurePreparation) VALUES (?)";
+      String sql = "INSERT INTO orders (heure_preparation) VALUES (?)";
 
        jdbcTemplate.update(new PreparedStatementCreator() {
         public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
@@ -48,7 +48,7 @@ public class CommandeImpl implements CommandeDAO {
        commande.setId(keyHolder.getKey().intValue());
       System.out.println("commande id " + keyHolder.getKey().intValue());
 
-      String insertDetail = "INSERT INTO detailCommandes(fk_id_commande,fk_id_produit, quantite) VALUES (?,?,?)";
+      String insertDetail = "INSERT INTO detail_orders (fk_id_order,fk_id_product, quantity) VALUES (?,?,?)";
        jdbcTemplate.batchUpdate(insertDetail, commande.getDetailOrder(), commande.getDetailOrder().size(), new ParameterizedPreparedStatementSetter<DetailOrderDTO>() {
         @Override
         public void setValues(PreparedStatement ps, DetailOrderDTO ligne) throws SQLException {
@@ -70,7 +70,7 @@ public class CommandeImpl implements CommandeDAO {
       throw new IllegalArgumentException("Commande null");
     }
     try {
-      String sql = "DELETE FROM commande where id_commande = ? ";
+      String sql = "DELETE FROM orders WHERE id = ? ";
       int rowAffected = jdbcTemplate.update(sql,id);
       if (rowAffected == 0) {
         System.out.println(" Aucune ligne effacer ");
@@ -87,7 +87,7 @@ public class CommandeImpl implements CommandeDAO {
   @Override
   public int updateOrder(CommandeDTO commande, CommandeDTO commandeUpdate) {
     try {
-      String sql = "UPDATE commande SET heurepreparation = ?, status = ? WHERE id_commande = ?";
+      String sql = "UPDATE orders SET heure_preparation = ?, status = ? WHERE id = ?";
       int rowAffected = jdbcTemplate.update(sql,
               commande.getHeurePreparation(),
               commandeUpdate.getStatus(),
@@ -110,17 +110,17 @@ public class CommandeImpl implements CommandeDAO {
     @Override
     public CommandeDTO mapRow(ResultSet rs, int rowNum) throws SQLException{
       CommandeDTO order = new CommandeDTO();
-      order.setId(rs.getInt("id_commande"));
-      order.setHeurePreparation(rs.getDate("heurePreparation"));
+      order.setId(rs.getInt("id"));
+      order.setHeurePreparation(rs.getDate("heure_preparation"));
       order.setStatus(rs.getString("status"));
       return order;
     }
   }
   @Override
   public CommandeDTO getOrderById(Integer id) throws SQLException {
-    String sql = "SELECT * FROM commande where id_commande = ?";
+    String sql = "SELECT * FROM orders WHERE id = ?";
     CommandeDTO order = jdbcTemplate.queryForObject(sql, new Object[]{id}, new OrderRowMapper());
-      String detailOrderSql = "SELECT * FROM detailCommandes WHERE fk_id_commande = ?";
+      String detailOrderSql = "SELECT * FROM detail_orders WHERE fk_id_order = ?";
       List<DetailOrderDTO> details = jdbcTemplate.query(detailOrderSql,new Object[]{order.getId()}, new DetailOrderRowMapper());
       for(DetailOrderDTO detail : details){
         detail.setCommande(order.getId());
@@ -133,19 +133,19 @@ public class CommandeImpl implements CommandeDAO {
     @Override
     public DetailOrderDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
       DetailOrderDTO detail = new DetailOrderDTO();
-      detail.setId(rs.getInt("id_detailCommande"));
-      detail.setProduit(rs.getInt("fk_id_produit"));
-      detail.setQuantite(rs.getInt("quantite"));
+      detail.setId(rs.getInt("fk_id_order"));
+      detail.setProduit(rs.getInt("fk_id_product"));
+      detail.setQuantite(rs.getInt("quantity"));
       return detail;
     }
   }
 
   @Override
   public List<CommandeDTO> getOrders() throws SQLException {
-    String sql = "SELECT * FROM commande";
+    String sql = "SELECT * FROM orders";
     List<CommandeDTO> orders = jdbcTemplate.query(sql, new OrderRowMapper());
     for(CommandeDTO order : orders){
-        String detailOrderSql = "SELECT * FROM detailCommandes WHERE fk_id_commande = ?";
+        String detailOrderSql = "SELECT * FROM detail_orders WHERE fk_id_order = ?";
         List<DetailOrderDTO> details = jdbcTemplate.query(detailOrderSql,new Object[]{order.getId()}, new DetailOrderRowMapper());
         for(DetailOrderDTO detail : details){
           detail.setCommande(order.getId());
