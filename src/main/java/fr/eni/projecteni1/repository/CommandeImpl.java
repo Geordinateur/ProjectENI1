@@ -1,6 +1,5 @@
 package fr.eni.projecteni1.repository;
 
-import fr.eni.projecteni1.bo.Commande.Commande;
 import fr.eni.projecteni1.bo.Commande.CommandeDTO;
 import fr.eni.projecteni1.bo.DetailCommande.DetailOrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
