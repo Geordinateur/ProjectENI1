@@ -41,6 +41,22 @@ public class CommandeService {
     }
   }
 
+  public Boolean updateOrder(CommandeDTO commande, CommandeDTO commandeUpdate) throws SQLException {
+    try {
+      int result = this.commandeDAO.updateOrder(commande, commandeUpdate);
+      if(result > 0) {
+        return true;
+      }
+      return false;
+    } catch (SQLException error) {
+      System.out.println("Erreur SQL : " + error.getMessage());
+      System.out.println("Code d'état SQL : " + error.getSQLState());
+      System.out.println("Code d'erreur du fournisseur : " + error.getErrorCode());
+      error.printStackTrace();
+      return false;
+    }
+  }
+
   public List<CommandeDTO> getOrder() throws SQLException {
     return this.commandeDAO.getOrders();
   }

@@ -47,11 +47,17 @@ public class CommandeController {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("Delete Order ", "Failed/Error"));
     }
   }
+  @PostMapping("/updateOrder/{id}")
+  @CrossOrigin
+  public Boolean updateOrder(@PathVariable Integer id, @RequestBody CommandeDTO updateCommande) throws SQLException {
+    CommandeDTO order = this.commandeService.getOrderById(id);
+    return this.commandeService.updateOrder(order, updateCommande);
+  }
 
   @GetMapping("/orderById/{id}")
   @CrossOrigin
   public ResponseEntity<CommandeDTO> getOrderById(@PathVariable Integer id) throws SQLException{
-    CommandeDTO order =this.commandeService.getOrderById(id);
+    CommandeDTO order = this.commandeService.getOrderById(id);
     return ResponseEntity.ok(order);
   }
 

@@ -85,6 +85,28 @@ public class CommandeImpl implements CommandeDAO {
       throw error;
     }
   }
+  @Override
+  public int updateOrder(CommandeDTO commande, CommandeDTO commandeUpdate) {
+    try {
+      String sql = "UPDATE commande SET heurepreparation = ?, status = ? WHERE id_commande = ?";
+      int rowAffected = jdbcTemplate.update(sql,
+              commande.getHeurePreparation(),
+              commandeUpdate.getStatus(),
+              commande.getId());
+      if(rowAffected == 0) {
+        System.out.println(("Aucune ligne mise à jour."));
+      } else {
+        System.out.println(commande.toString());
+        System.out.println(commande.getStatus());
+        System.out.println(rowAffected + "commande mise à jour");
+      }
+      return rowAffected;
+    } catch(Exception error) {
+      error.printStackTrace();
+      throw error;
+    }
+  }
+
   public static class OrderRowMapper implements RowMapper<CommandeDTO>{
     @Override
     public CommandeDTO mapRow(ResultSet rs, int rowNum) throws SQLException{
