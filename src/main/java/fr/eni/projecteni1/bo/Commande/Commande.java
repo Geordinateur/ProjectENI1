@@ -3,7 +3,7 @@ package fr.eni.projecteni1.bo.Commande;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import fr.eni.projecteni1.bo.DetailCommande.DetailOrder;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Commande {
@@ -12,8 +12,8 @@ public class Commande {
   private Integer id;
 
   private CommandeStatus status;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
-  private Date heurePreparation;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "UTC+2")
+  private LocalDateTime heurePreparation;
 
   public Commande() {
 
@@ -28,11 +28,11 @@ public class Commande {
       '}';
   }
 
-  public Date getHeurePreparation() {
+  public LocalDateTime getHeurePreparation() {
     return heurePreparation;
   }
 
-  public void setHeurePreparation(Date heurePreparation) {
+  public void setHeurePreparation(LocalDateTime heurePreparation) {
     this.heurePreparation = heurePreparation;
   }
 

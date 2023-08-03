@@ -13,6 +13,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.time.ZoneId;
 import java.util.List;
 
 @Repository
@@ -37,7 +38,8 @@ public class CommandeImpl implements CommandeDAO {
        jdbcTemplate.update(new PreparedStatementCreator() {
         public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
           PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-          ps.setTimestamp(1, new Timestamp(commande.getHeurePreparation().getTime()));
+          Timestamp timestamp = Timestamp.valueOf(commande.getHeurePreparation());
+          ps.setTimestamp(1, timestamp);
           return ps;
         }
       }, keyHolder);
@@ -109,10 +111,12 @@ public class CommandeImpl implements CommandeDAO {
   public static class OrderRowMapper implements RowMapper<CommandeDTO>{
     @Override
     public CommandeDTO mapRow(ResultSet rs, int rowNum) throws SQLException{
+      Timestamp timestamp = rs.getTimestamp("heure_preparation");
       CommandeDTO order = new CommandeDTO();
       order.setId(rs.getInt("id"));
-      order.setHeurePreparation(rs.getDate("heure_preparation"));
+      order.setHeurePreparation(timestamp.toLocalDateTime());
       order.setStatus(rs.getString("status"));
+      System.out.println((order.getHeurePreparation()));
       return order;
     }
   }
