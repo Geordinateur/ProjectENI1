@@ -10,7 +10,7 @@ public class CommandeDTO {
   private List<DetailOrderDTO> detailOrder;
 
   private Integer id;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+2")
   private Date heurePreparation;
 
   private String status;

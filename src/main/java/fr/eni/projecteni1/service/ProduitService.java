@@ -9,7 +9,7 @@ import fr.eni.projecteni1.bo.Produit;
 public interface ProduitService {
     public List<Produit> getProduits();
     public void saveProduit(Produit produit);
-    public int deleteProduit(Produit produit);
+    public int deleteProduit(Integer id);
     public int updateProduit(Integer idProduit, Produit produit);
 
     //private ProduitRepository produitRepository;

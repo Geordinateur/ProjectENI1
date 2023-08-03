@@ -45,11 +45,11 @@ public class ProduitController {
 
     @DeleteMapping("/DeleteProduit/{id}")
     @CrossOrigin
-    public ResponseEntity<Map<String, String>> supprimerProduit(@RequestBody Produit produit) throws SQLException {
-        int isSuccess = this.produitService.deleteProduit(produit);
-        if(isSuccess > 0){
+    public ResponseEntity<Map<String, String>> deleteProduit(@PathVariable Integer id) throws SQLException {
+        int isSuccess = this.produitService.deleteProduit(id);
+        if (isSuccess > 0) {
             return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("Delete Order", "success"));
-        } else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("Delete Order ", "Failed/Error"));
         }
     }

@@ -36,9 +36,9 @@ public class ProduitRepositoryImpl implements ProduitRepository {
     }
 
     @Override
-    public int deleteProduit(Produit produit) {
-        String sql = "DELETE FROM TProduits WHERE id = ? ";
-        return jdbcTemplate.update(sql, produit.getId());
+    public int deleteProduit(Integer id) {
+        String sql = "DELETE FROM products WHERE id = ? ";
+        return jdbcTemplate.update(sql, id);
 
     }
 
