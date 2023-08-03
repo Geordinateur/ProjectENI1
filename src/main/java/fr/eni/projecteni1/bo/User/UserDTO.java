@@ -80,4 +80,5 @@ public class UserDTO {
       ", status='" + status + '\'' +
       '}';
   }
+
 }

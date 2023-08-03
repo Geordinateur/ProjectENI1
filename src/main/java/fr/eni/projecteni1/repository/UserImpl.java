@@ -1,19 +1,25 @@
 package fr.eni.projecteni1.repository;
 
 import fr.eni.projecteni1.bo.User.UserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
 @Repository
 public class UserImpl implements UserDAO {
+  @Autowired
+  private BCryptPasswordEncoder passwordEncoder;
+
   private final JdbcTemplate jdbcTemplate;
+
 
   public UserImpl(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
@@ -28,9 +34,11 @@ public class UserImpl implements UserDAO {
       jdbcTemplate.update(new PreparedStatementCreator() {
         @Override
         public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+          user.setPassword(passwordEncoder.encode(user.getPassword()));
           PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
           ps.setString(1, user.getUserName());
-          ps.setString(2, user.getPassword());
+          ps.setString(2,user.getPassword());
+          System.out.println("password " + user.getPassword());
           return ps;
         }
       }, keyHolder);
@@ -39,10 +47,11 @@ public class UserImpl implements UserDAO {
       }
       user.setId(keyHolder.getKey().intValue());
     } catch (DataAccessException | SQLException error) {
-    error.printStackTrace();
-    throw new RuntimeException(error);
+      error.printStackTrace();
+      throw new RuntimeException(error);
     }
   }
+
   @Override
   public int deleteUser(Integer id) {
     if (id == null) {
@@ -64,7 +73,7 @@ public class UserImpl implements UserDAO {
     }
   }
 
-  public static class OrderRowMapper implements RowMapper<UserDTO>{
+  public static class OrderRowMapper implements RowMapper<UserDTO> {
     @Override
     public UserDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
       UserDTO user = new UserDTO();
@@ -78,7 +87,7 @@ public class UserImpl implements UserDAO {
   @Override
   public UserDTO getUser(String userName) {
     String sql = "SELECT * FROM users WHERE userName = ? ";
-    UserDTO user = jdbcTemplate.queryForObject(sql,new Object[]{userName}, new OrderRowMapper());
+    UserDTO user = jdbcTemplate.queryForObject(sql, new Object[]{userName}, new OrderRowMapper());
     return user;
   }
 
