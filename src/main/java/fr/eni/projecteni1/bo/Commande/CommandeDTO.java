@@ -3,15 +3,16 @@ package fr.eni.projecteni1.bo.Commande;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import fr.eni.projecteni1.bo.DetailCommande.DetailOrderDTO;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class CommandeDTO {
   private List<DetailOrderDTO> detailOrder;
 
   private Integer id;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+2")
-  private Date heurePreparation;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "UTC+2")
+  private LocalDateTime heurePreparation;
 
   private String status;
 
@@ -43,7 +44,7 @@ public class CommandeDTO {
     this.id = id;
   }
 
-  public Date getHeurePreparation() {
+  public LocalDateTime getHeurePreparation() {
     return heurePreparation;
   }
 
@@ -56,7 +57,7 @@ public class CommandeDTO {
             '}';
   }
 
-  public void setHeurePreparation(Date heurePreparation) {
+  public void setHeurePreparation(LocalDateTime heurePreparation) {
     this.heurePreparation = heurePreparation;
   }
 }
