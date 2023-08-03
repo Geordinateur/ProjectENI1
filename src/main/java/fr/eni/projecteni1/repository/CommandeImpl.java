@@ -116,7 +116,6 @@ public class CommandeImpl implements CommandeDAO {
       order.setId(rs.getInt("id"));
       order.setHeurePreparation(timestamp.toLocalDateTime());
       order.setStatus(rs.getString("status"));
-      System.out.println((order.getHeurePreparation()));
       return order;
     }
   }
