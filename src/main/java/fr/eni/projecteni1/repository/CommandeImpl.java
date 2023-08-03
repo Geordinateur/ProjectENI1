@@ -33,11 +33,7 @@ public class CommandeImpl implements CommandeDAO {
     }
     try {
       KeyHolder keyHolder = new GeneratedKeyHolder();
-<<<<<<< HEAD
-      String sql = "INSERT INTO orders (heure_preparation) VALUES (?)";
-=======
       String sql = "INSERT INTO orders(heure_preparation) VALUES (?)";
->>>>>>> 1ec05d1c0efd672082f1b1f869683c595747acbc
 
        jdbcTemplate.update(new PreparedStatementCreator() {
         public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
@@ -51,13 +47,8 @@ public class CommandeImpl implements CommandeDAO {
       if (keyHolder.getKey() == null) {
         throw new SQLException("Failed to insert Commande, no ID obtained.");
       }
-       commande.setId(keyHolder.getKey().intValue());
-
-<<<<<<< HEAD
-      String insertDetail = "INSERT INTO detail_orders (fk_id_order,fk_id_product, quantity) VALUES (?,?,?)";
-=======
-      String insertDetail = "INSERT INTO detail_orders(fk_id_order,fk_id_product, quantity) VALUES (?,?,?)";
->>>>>>> 1ec05d1c0efd672082f1b1f869683c595747acbc
+        commande.setId(keyHolder.getKey().intValue());
+        String insertDetail = "INSERT INTO detail_orders (fk_id_order,fk_id_product, quantity) VALUES (?,?,?)";
        jdbcTemplate.batchUpdate(insertDetail, commande.getDetailOrder(), commande.getDetailOrder().size(), new ParameterizedPreparedStatementSetter<DetailOrderDTO>() {
         @Override
         public void setValues(PreparedStatement ps, DetailOrderDTO ligne) throws SQLException {
@@ -78,11 +69,7 @@ public class CommandeImpl implements CommandeDAO {
       throw new IllegalArgumentException("Commande null");
     }
     try {
-<<<<<<< HEAD
       String sql = "DELETE FROM orders WHERE id = ? ";
-=======
-      String sql = "DELETE FROM orders where id = ? ";
->>>>>>> 1ec05d1c0efd672082f1b1f869683c595747acbc
       int rowAffected = jdbcTemplate.update(sql,id);
       if (rowAffected == 0) {
         System.out.println(" Aucune ligne effacer ");
@@ -124,22 +111,14 @@ public class CommandeImpl implements CommandeDAO {
       Timestamp timestamp = rs.getTimestamp("heure_preparation");
       CommandeDTO order = new CommandeDTO();
       order.setId(rs.getInt("id"));
-<<<<<<< HEAD
       order.setHeurePreparation(timestamp.toLocalDateTime());
-=======
-      order.setHeurePreparation(rs.getDate("heure_preparation"));
->>>>>>> 1ec05d1c0efd672082f1b1f869683c595747acbc
       order.setStatus(rs.getString("status"));
       return order;
     }
   }
   @Override
   public CommandeDTO getOrderById(Integer id) throws SQLException {
-<<<<<<< HEAD
     String sql = "SELECT * FROM orders WHERE id = ?";
-=======
-    String sql = "SELECT * FROM orders where id = ?";
->>>>>>> 1ec05d1c0efd672082f1b1f869683c595747acbc
     CommandeDTO order = jdbcTemplate.queryForObject(sql, new Object[]{id}, new OrderRowMapper());
       String detailOrderSql = "SELECT * FROM detail_orders WHERE fk_id_order = ?";
       List<DetailOrderDTO> details = jdbcTemplate.query(detailOrderSql,new Object[]{order.getId()}, new DetailOrderRowMapper());
@@ -154,11 +133,7 @@ public class CommandeImpl implements CommandeDAO {
     @Override
     public DetailOrderDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
       DetailOrderDTO detail = new DetailOrderDTO();
-<<<<<<< HEAD
-      detail.setId(rs.getInt("fk_id_order"));
-=======
       detail.setId(rs.getInt("id"));
->>>>>>> 1ec05d1c0efd672082f1b1f869683c595747acbc
       detail.setProduit(rs.getInt("fk_id_product"));
       detail.setQuantite(rs.getInt("quantity"));
       return detail;

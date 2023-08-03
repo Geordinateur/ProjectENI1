@@ -8,9 +8,25 @@
         </encoder>
     </appender>
 
-    <!-- Attachez l'appender aux loggers souhaités -->
+    <!-- Appender pour enregistrer les logs dans des fichiers -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- Répertoire de destination des fichiers de log -->
+        <file>./logs/app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- Format du nom de fichier avec date et type de log (ex: app-info-2023-08-03.log) -->
+            <fileNamePattern>./logs/app-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize> <!-- Taille maximum d'un fichier de log -->
+            <maxHistory>30</maxHistory> <!-- Nombre maximum de fichiers de log archivés -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Attachez les appenders aux loggers souhaités -->
     <root level="debug">
         <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
     </root>
 
 </configuration>
