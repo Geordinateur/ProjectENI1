@@ -12,7 +12,6 @@ import java.util.List;
 public class UserDTO implements UserDetails {
   @Nullable
   private CommandeDTO commande;
-
   private List<GrantedAuthority> authorities;
   private String userName;
   private String password;
