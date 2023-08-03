@@ -30,18 +30,7 @@ public class SecurityConfig {
       }).httpBasic(Customizer.withDefaults());
     return http.build();
 
-   /* http.csrf()// token qui est envoyer auto entre le client et server qui verifie que le formulaire est bien correcte
-      .disable()
-      .authorizeRequests()
-      .requestMatchers("/saveUser")
-      .permitAll()
-      .and()
-      .authorizeRequests()
-      .anyRequest()
-      .authenticated()
-      .and()
-      .httpBasic(Customizer.withDefaults());
-    return http.build();*/
+
   }
   @Bean
   public UserDetailsService userDetailsService(){
