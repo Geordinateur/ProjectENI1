@@ -2,10 +2,18 @@ package fr.eni.projecteni1.bo.User;
 
 import fr.eni.projecteni1.bo.Commande.CommandeDTO;
 import jakarta.annotation.Nullable;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public class UserDTO {
+import java.util.Collection;
+import java.util.List;
+
+public class UserDTO implements UserDetails {
   @Nullable
   private CommandeDTO commande;
+
+  private List<GrantedAuthority> authorities;
   private String userName;
   private String password;
   private Integer id;
@@ -38,16 +46,48 @@ public class UserDTO {
     this.commande = commande;
   }
 
-  public String getUserName() {
-    return userName;
-  }
+
 
   public void setUserName(String userName) {
     this.userName = userName;
   }
 
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return authorities;
+  }
+
+  public void setAuthorities(List<GrantedAuthority> authorities){
+    this.authorities = authorities;
+  }
+
   public String getPassword() {
     return password;
+  }
+
+  @Override
+  public String getUsername() {
+    return userName;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
   }
 
   public void setPassword(String password) {

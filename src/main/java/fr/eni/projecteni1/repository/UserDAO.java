@@ -7,6 +7,6 @@ import java.sql.SQLException;
 
 public interface UserDAO {
    void createUser(UserDTO userDto);
-   UserDTO getUser(String userName) throws SQLException;
+   UserDTO getUser(String userName) ;
    int deleteUser(Integer id);
 }

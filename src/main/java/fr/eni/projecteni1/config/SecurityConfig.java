@@ -32,7 +32,7 @@ public class SecurityConfig {
 
 
   }
-  @Bean
+  /*@Bean
   public UserDetailsService userDetailsService(){
 
     UserDetails ramesh = User.builder()
@@ -48,7 +48,7 @@ public class SecurityConfig {
       .build();
 
     return new InMemoryUserDetailsManager(ramesh, admin);
-  }
+  }*/
 
 
 }

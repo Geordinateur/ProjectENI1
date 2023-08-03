@@ -20,19 +20,11 @@ public class UserService {
   }
 
   public UserDTO getUser(String userName) throws SQLException {
-    try{
-      UserDTO user = this.user.getUser(userName);
-      if(user == null){
-        throw new RuntimeException();
-      }
-      return user;
-    }catch (SQLException error) {
-      System.out.println("Erreur SQL : " + error.getMessage());
-      System.out.println("Code d'état SQL : " + error.getSQLState());
-      System.out.println("Code d'erreur du fournisseur : " + error.getErrorCode());
-      error.printStackTrace();
-      throw new RuntimeException("SQL erred", error);
+    UserDTO user = this.user.getUser(userName);
+    if(user == null){
+      throw new RuntimeException();
     }
+    return user;
 
   }
 

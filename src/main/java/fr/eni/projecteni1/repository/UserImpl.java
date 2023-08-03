@@ -8,10 +8,14 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class UserImpl implements UserDAO {
@@ -36,7 +40,7 @@ public class UserImpl implements UserDAO {
         public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
           user.setPassword(passwordEncoder.encode(user.getPassword()));
           PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-          ps.setString(1, user.getUserName());
+          ps.setString(1, user.getUsername());
           ps.setString(2,user.getPassword());
           System.out.println("password " + user.getPassword());
           return ps;
@@ -79,6 +83,23 @@ public class UserImpl implements UserDAO {
       UserDTO user = new UserDTO();
       user.setUserName(rs.getString("userName"));
       user.setStatus(rs.getString("status"));
+      user.setPassword(rs.getString("password"));
+      List<GrantedAuthority> authorities = new ArrayList<>();
+      switch (user.getStatus()){
+        case "CLIENT":
+        authorities.add(new SimpleGrantedAuthority("ROLE_CLIENT"));
+        break;
+        case "EMPLOYE":
+          authorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYE"));
+          break;
+        case "CUISINIER":
+          authorities.add(new SimpleGrantedAuthority("ROLE_CUISINIER"));
+          break;
+        case "GERANT":
+          authorities.add(new SimpleGrantedAuthority("ROLE_GERANT"));
+          break;
+      }
+      user.setAuthorities(authorities);
       user.setId(rs.getInt("id"));
       return user;
     }
@@ -86,8 +107,9 @@ public class UserImpl implements UserDAO {
 
   @Override
   public UserDTO getUser(String userName) {
-    String sql = "SELECT * FROM users WHERE userName = ? ";
+    String sql = "SELECT userName,status,password, id FROM users WHERE userName = ? ";
     UserDTO user = jdbcTemplate.queryForObject(sql, new Object[]{userName}, new OrderRowMapper());
+
     return user;
   }
 
