@@ -18,6 +18,16 @@ public class UserController {
   @Autowired
   private UserService user;
 
+  @PostMapping("/login")
+  @CrossOrigin
+  public Boolean login(@RequestBody UserDTO userDTO){
+    Boolean isSuccess = this.user.authUser(userDTO.getUsername(),userDTO.getPassword());
+    if(!isSuccess){
+      System.out.println("Erreur");
+    }
+    return isSuccess;
+  }
+
 
   @PostMapping("/saveUser")
   @CrossOrigin

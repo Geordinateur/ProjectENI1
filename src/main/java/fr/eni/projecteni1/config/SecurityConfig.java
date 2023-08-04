@@ -31,6 +31,7 @@ public class SecurityConfig {
         authorize.requestMatchers("/orderById/{id}").hasAnyRole("EMPLOYE", "CUISINIER", "GERANT");
         authorize.requestMatchers("/allOrders").hasAnyRole("EMPLOYE", "CUISINIER", "GERANT");
         authorize.requestMatchers("/saveUser").permitAll();
+        authorize.requestMatchers("/login").permitAll();
         authorize.requestMatchers("/deleteUser/{id}").hasRole("GERANT");
         authorize.requestMatchers("/getUser/{userName}").hasAnyRole("CLIENT", "EMPLOYE", "GERANT");
         authorize.requestMatchers("/orderById/{id}").hasAnyRole("EMPLOYE", "CUISINIER", "GERANT");
@@ -40,6 +41,4 @@ public class SecurityConfig {
 
 
   }
-
-
 }

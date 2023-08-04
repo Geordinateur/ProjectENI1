@@ -36,5 +36,13 @@ public class UserService {
     return rowAffected;
   }
 
+  public Boolean authUser(String userName, String password){
+    Boolean isSuccess = this.user.authUser(userName,password);
+    if(!isSuccess){
+      System.out.println("Erreur de mot de passe");
+    }
+    return isSuccess;
+  }
+
 
 }

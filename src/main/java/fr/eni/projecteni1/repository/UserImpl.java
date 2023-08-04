@@ -10,6 +10,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +28,16 @@ public class UserImpl implements UserDAO {
 
   public UserImpl(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
+  }
+
+  @Override
+  public Boolean authUser(String userName, String password) {
+    String sql = "SELECT password FROM users WHERE userName = ?";
+    String encodedPassword = jdbcTemplate.queryForObject(sql, new Object[]{userName}, String.class);
+    if(encodedPassword == null ){
+      throw new UsernameNotFoundException("Error");
+    }
+    return passwordEncoder.matches(password, encodedPassword);
   }
 
   @Override
