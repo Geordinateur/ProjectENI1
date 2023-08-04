@@ -2,6 +2,8 @@ package fr.eni.projecteni1.repository;
 
 import fr.eni.projecteni1.bo.Commande.CommandeDTO;
 import fr.eni.projecteni1.bo.DetailCommande.DetailOrderDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +21,8 @@ import java.util.List;
 @Repository
 public class CommandeImpl implements CommandeDAO {
   private final JdbcTemplate jdbcTemplate;
+  static final Logger LOGGER = LoggerFactory.getLogger(CommandeImpl.class);
+
 
   @Autowired
   public CommandeImpl(JdbcTemplate jdbcTemplate) {
@@ -58,6 +62,7 @@ public class CommandeImpl implements CommandeDAO {
         }
       });
     } catch (DataAccessException | SQLException error) {
+      LOGGER.error("ERROR");
       error.printStackTrace();
       throw new RuntimeException(error);
     }

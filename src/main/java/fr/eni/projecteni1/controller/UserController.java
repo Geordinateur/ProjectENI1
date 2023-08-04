@@ -2,6 +2,8 @@ package fr.eni.projecteni1.controller;
 
 import fr.eni.projecteni1.bo.User.UserDTO;
 import fr.eni.projecteni1.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +16,22 @@ import java.util.Map;
 
 @RestController
 public class UserController {
+  Logger logger = LoggerFactory.getLogger(LoggingController.class);
 
   @Autowired
   private UserService user;
+
+  @PostMapping("/login")
+  @CrossOrigin
+  public Boolean login(@RequestBody UserDTO userDTO){
+    Boolean isSuccess = this.user.authUser(userDTO.getUsername(),userDTO.getPassword());
+    if(!isSuccess){
+      logger.error("Erreur d'authentification: " + userDTO.getUsername());
+      return isSuccess;
+    }
+    logger.info("Identification de " + userDTO.getUsername());
+    return isSuccess;
+  }
 
 
   @PostMapping("/saveUser")

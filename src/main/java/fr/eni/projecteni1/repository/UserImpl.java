@@ -1,6 +1,9 @@
 package fr.eni.projecteni1.repository;
 
 import fr.eni.projecteni1.bo.User.UserDTO;
+import fr.eni.projecteni1.controller.LoggingController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +13,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +23,9 @@ import java.util.List;
 
 @Repository
 public class UserImpl implements UserDAO {
+
+  Logger logger = LoggerFactory.getLogger(LoggingController.class);
+
   @Autowired
   private BCryptPasswordEncoder passwordEncoder;
 
@@ -30,11 +37,20 @@ public class UserImpl implements UserDAO {
   }
 
   @Override
+  public Boolean authUser(String userName, String password) {
+    String sql = "SELECT password FROM users WHERE userName = ?";
+    String encodedPassword = jdbcTemplate.queryForObject(sql, new Object[]{userName}, String.class);
+    if(encodedPassword == null ){
+      throw new UsernameNotFoundException("Error");
+    }
+    return passwordEncoder.matches(password, encodedPassword);
+  }
+
+  @Override
   public void createUser(UserDTO user) {
     KeyHolder keyHolder = new GeneratedKeyHolder();
     String sql = "INSERT INTO users(userName,password) VALUES(?,?)";
     try {
-
       jdbcTemplate.update(new PreparedStatementCreator() {
         @Override
         public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
@@ -51,6 +67,7 @@ public class UserImpl implements UserDAO {
       }
       user.setId(keyHolder.getKey().intValue());
     } catch (DataAccessException | SQLException error) {
+      logger.error(error.toString());
       error.printStackTrace();
       throw new RuntimeException(error);
     }
@@ -72,6 +89,7 @@ public class UserImpl implements UserDAO {
       }
       return rowAffected;
     } catch (Exception error) {
+      logger.error(error.toString());
       error.printStackTrace();
       throw error;
     }

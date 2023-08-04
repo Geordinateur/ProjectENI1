@@ -24,7 +24,7 @@ public class DetailOrderImpl implements DetailOrderDAO {
   }
 
   @Override
-  public int createDetailOrder(Commande commande ,Produit produit, Integer quantite) throws SQLException {
+  public int createDetailOrder(Commande commande ,Produit produit, Integer quantite) {
     if(produit == null ){
       throw new IllegalArgumentException("Product can not be null");
     }

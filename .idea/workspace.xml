@@ -5,16 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d227bc66-d87f-4485-963c-6ded54956137" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-dev.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/spring-boot-logger.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.logs/app.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/CommandeImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/DetailOrderImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/DetailOrderImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/ProduitRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/ProduitRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/ProduitRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/ProduitRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/UserImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/repository/UserImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/eni/projecteni1/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,6 +163,7 @@
       <workItem from="1690959279291" duration="5828000" />
       <workItem from="1690971033987" duration="10999000" />
       <workItem from="1691046148781" duration="2658000" />
+      <workItem from="1691139216953" duration="678000" />
     </task>
     <task id="LOCAL-00001" summary="merge product in feat/#9">
       <option name="closed" value="true" />

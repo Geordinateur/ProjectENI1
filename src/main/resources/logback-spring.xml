@@ -1,20 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
 <configuration>
 
-    <!-- Appender pour afficher les logs sur la console -->
+    &lt;!&ndash; Appender pour afficher les logs sur la console &ndash;&gt;
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
+    &lt;!&ndash; Appender pour enregistrer les logs dans des fichiers &ndash;&gt;
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        &lt;!&ndash; Répertoire de destination des fichiers de log &ndash;&gt;
+        <file>./logs/app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            &lt;!&ndash; Format du nom de fichier avec date et type de log (ex: app-info-2023-08-03.log) &ndash;&gt;
+            <fileNamePattern>./logs/app-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize> &lt;!&ndash; Taille maximum d'un fichier de log &ndash;&gt;
+            <maxHistory>30</maxHistory> &lt;!&ndash; Nombre maximum de fichiers de log archivés &ndash;&gt;
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    &lt;!&ndash; Attachez les appenders aux loggers souhaités &ndash;&gt;
+    <root level="debug">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>-->
+<configuration>
+
+    <!-- Conversion de couleur pour la console -->
+    <conversionRule conversionWord="highlight" converterClass="ch.qos.logback.classic.pattern.color.HighlightingCompositeConverter" />
+
+    <!-- Appender pour afficher les logs sur la console avec couleur -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- Utilisation de la conversion de couleur conditionnelle pour le niveau de log -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %green(%.-5level) %highlight(%logger{36}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <!-- Appender pour enregistrer les logs dans des fichiers -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- Répertoire de destination des fichiers de log -->
-        <file>./logs/app.log</file>
+        <file>./logs/log.txt</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!-- Format du nom de fichier avec date et type de log (ex: app-info-2023-08-03.log) -->
-            <fileNamePattern>./logs/app-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- Format du nom de fichier avec date, heure et type de log (ex: log-2023-08-03.log) -->
+            <fileNamePattern>./logs/log-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>10MB</maxFileSize> <!-- Taille maximum d'un fichier de log -->
             <maxHistory>30</maxHistory> <!-- Nombre maximum de fichiers de log archivés -->
         </rollingPolicy>
@@ -23,10 +59,20 @@
         </encoder>
     </appender>
 
+    <!-- Ajouter un filtre pour les niveaux ERROR uniquement -->
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <level>ERROR</level>
+        <onMatch>ACCEPT</onMatch>
+        <onMismatch>DENY</onMismatch>
+    </filter>
+
     <!-- Attachez les appenders aux loggers souhaités -->
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="FILE" />
     </root>
 
 </configuration>
+
+
+
