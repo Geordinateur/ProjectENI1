@@ -1,0 +1,9 @@
+fr.eni.projecteni1
+fr.eni.projecteni1.bo
+fr.eni.projecteni1.bo.Commande
+fr.eni.projecteni1.bo.DetailCommande
+fr.eni.projecteni1.bo.User
+fr.eni.projecteni1.config
+fr.eni.projecteni1.controller
+fr.eni.projecteni1.repository
+fr.eni.projecteni1.service
